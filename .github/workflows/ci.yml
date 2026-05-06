@@ -14,7 +14,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install package
+        run: python -m pip install .
       - name: Unit tests
         run: python -m unittest discover -s tests -v
       - name: Offline smoke test
-        run: python solana_grpc_toolkit.py --self-test
+        run: python -m solana_grpc_bootstrap_toolkit --self-test

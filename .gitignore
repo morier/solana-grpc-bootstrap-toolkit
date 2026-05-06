@@ -4,3 +4,7 @@ __pycache__/
 .vscode/
 tmp/
 grpc_config.json
+build/
+dist/
+*.egg-info/
+

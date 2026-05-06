@@ -27,17 +27,37 @@ Many teams overpay for gRPC services because they lack a tuned baseline config a
 ## Install
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install .
 ```
 
-(There are no third-party runtime dependencies in v0.1.0.)
+Once published to PyPI:
+
+```bash
+python -m pip install solana-grpc-bootstrap-toolkit
+```
+
+Editable install during development:
+
+```bash
+python -m pip install -e .
+```
+
+(There are no third-party runtime dependencies in v0.2.0.)
 
 ## Usage
+
+Cross-platform recommendation:
+
+```bash
+python -m solana_grpc_bootstrap_toolkit --self-test
+```
+
+If the console script is available on your PATH, you can also use:
 
 Initialize baseline config:
 
 ```bash
-python solana_grpc_toolkit.py init \
+solana-grpc-toolkit init \
   --config grpc_config.json \
   --endpoint grpc.mainnet.provider.com:443 \
   --workload standard \
@@ -47,7 +67,7 @@ python solana_grpc_toolkit.py init \
 Run config doctor:
 
 ```bash
-python solana_grpc_toolkit.py doctor \
+solana-grpc-toolkit doctor \
   --config grpc_config.json \
   --fail-on-score-below 80 \
   --prometheus-file doctor_metrics.prom
@@ -56,7 +76,7 @@ python solana_grpc_toolkit.py doctor \
 Suggest tune profile:
 
 ```bash
-python solana_grpc_toolkit.py tune \
+solana-grpc-toolkit tune \
   --config grpc_config.json \
   --workload heavy \
   --provider-profile helius-low-latency
@@ -65,13 +85,13 @@ python solana_grpc_toolkit.py tune \
 Apply suggestions:
 
 ```bash
-python solana_grpc_toolkit.py tune --config grpc_config.json --workload heavy --apply
+solana-grpc-toolkit tune --config grpc_config.json --workload heavy --apply
 ```
 
 Run benchmark:
 
 ```bash
-python solana_grpc_toolkit.py bench \
+solana-grpc-toolkit bench \
   --mode stream-sim \
   --endpoint grpc.mainnet.provider.com:443 \
   --warmup-samples 20 \
@@ -82,6 +102,12 @@ python solana_grpc_toolkit.py bench \
 ```
 
 Offline self-test:
+
+```bash
+solana-grpc-toolkit --self-test
+```
+
+Backward-compatible source execution still works:
 
 ```bash
 python solana_grpc_toolkit.py --self-test
@@ -112,6 +138,19 @@ python solana_grpc_toolkit.py --self-test
 ## CI
 
 GitHub Actions runs unit tests and the offline self-test on every push.
+
+## Publishing
+
+Build distributions locally:
+
+```bash
+python -m pip install build twine
+python -m build
+python -m twine check dist/*
+```
+
+The repository also includes a PyPI publish workflow that is designed for trusted publishing.
+To activate it, configure this GitHub repository as a trusted publisher in PyPI.
 
 ## Roadmap
 

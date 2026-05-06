@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.3.0 - 2026-05-06
+
+- Added installable Python package layout under `src/solana_grpc_bootstrap_toolkit`
+- Added `pyproject.toml` metadata for setuptools-based packaging
+- Added console script entrypoint: `solana-grpc-toolkit`
+- Updated CI to install package and run smoke test through installed command
+- Preserved backward-compatible source execution via `solana_grpc_toolkit.py`
+- Added PyPI-ready metadata, license file, and publish workflow
+- Added local build + `twine check` publishing guidance
+
 ## v0.2.0 - 2026-05-06
 
 - Added provider profiles for Helius/Triton/QuickNode/custom baseline

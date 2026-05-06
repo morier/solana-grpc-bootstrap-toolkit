@@ -1,8 +1,14 @@
 import tempfile
 import unittest
 from pathlib import Path
+import sys
 
-import solana_grpc_toolkit as toolkit
+ROOT = Path(__file__).resolve().parents[1]
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from solana_grpc_bootstrap_toolkit import cli as toolkit
 
 
 class SolanaGrpcToolkitTests(unittest.TestCase):
